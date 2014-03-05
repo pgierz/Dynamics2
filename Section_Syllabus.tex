@@ -1,0 +1,105 @@
+
+\documentclass[11pt]{article}
+
+\usepackage{ifpdf}
+\ifpdf 
+    \usepackage[pdftex]{graphicx}   % to include graphics
+    \pdfcompresslevel=9 
+    \usepackage[pdftex,     % sets up hyperref to use pdftex driver
+            plainpages=false,   % allows page i and 1 to exist in the same document
+            breaklinks=true,    % link texts can be broken at the end of line
+            colorlinks=true,
+            pdftitle=My Document
+            pdfauthor=My Good Self
+           ]{hyperref} 
+    \usepackage{thumbpdf}
+\else 
+    \usepackage{graphicx}       % to include graphics
+    \usepackage{hyperref}       % to simplify the use of \href
+\fi 
+
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{draftwatermark}
+\SetWatermarkText{DRAFT}
+\SetWatermarkScale{5}
+
+\title{Dynamics II}
+\author{Prof. Gerrit Lohmann \& Paul Gierz}
+\date{Course Information}
+
+\begin{document}
+\maketitle
+
+\section*{Course Description}
+
+The focus of the course is to identify the underlying dynamics for the atmosphere-ocean system. This is done through theory, numerical models, and statistical data analysis. It has been recognized that the atmospheric and oceanic flow binds together the interactions between the biosphere, hydrosphere, lithosphere and atmosphere that control the planetary environment. The fundamental concepts of atmosphere-ocean flow, energetics, vorticity, wave motion are described. This includes atmospheric wave motion, extratropical synoptic scale systems, the oceanic wind driven and thermohaline circulation. These phenomena are described using the dynamical equations, observational and proxy data, as well basic physical and mathematical concepts. Practicals complement the lessons. Some specific aspects examined will be:
+\begin{itemize}
+\item Ocean Circulation
+\item Atmospheric dynamics and related teleconnection patterns
+\item Climate variability patterns
+\item Reconstruction of climate, instrumental, and proxy data
+\item Dynamical concepts for climate dynamics: Bifurcations, Feedback analysis
+\item Instabilities in the atmosphere-ocean system and the dynamics of waves
+\item Statistical approach of fluid dynamics
+\item Fundamental models
+\end{itemize}
+
+\section*{Lecture}
+\begin{tabular}{>{\hfill}p{5cm}|p{11cm}} 
+	Instructor & Professor Gerrit Lohmann \\
+	email & \texttt{gerrit.lohmann@awi.de} \\
+	Lecture & M. $14^{00}-16^{00}$ \\
+	&  NW1, Room S3121 \\
+	\multicolumn{2}{c}{} 
+\end{tabular}
+\section*{Tutorial}
+\begin{tabular}{>{\hfill}p{5cm}|p{11cm}}
+	TA & Paul Gierz \\
+	email & \texttt{paul.gierz@awi.de}\\
+    ``Office" Hours & M. $10^{00}-12^{00}$ \\
+	& Study Room next to Caf\'{e} Quark \\
+	Discussion \& Tutorial & $16^{00}-17^{00}$ \\
+	& NW1, Room S3121 \\
+	\multicolumn{2}{c}{} 
+\end{tabular}
+
+\section*{Exercises}
+There will be homework exercises throughout the semester:
+\begin{description}
+\item[May 5] Ex. 1 
+\item[May 12] Ex. 2, Ex. 1 collected
+\item[May 19] Ex. 3, Ex. 2 collected, Ex. 1 discussed
+\item[May 26] Ex. 4, Ex. 3 collected, Ex. 2 discussed
+\item[June 2] Ex. 5, Ex. 4 collected, Ex. 3 discussed
+\item[June 16] Ex. 6, Ex. 5 collected, Ex. 4 discussed
+\item[June 23] Ex. 7, Ex. 6 collected, Ex. 5 discussed
+\item[June 30] Ex. 8, Ex. 7 collected, Ex. 6 discussed
+\item[July 7] Ex. 9, Ex. 8 collected, Ex. 7 discussed
+\item[July 14] Ex. 9 collected, Ex. 8 discussed
+\item[July 21] Ex. 9 discussed, General Questions and Exam Preparation
+\end{description}
+
+\section*{Practicals}
+There will be several practical computer exercises during the semester:
+\begin{description}
+\item[May 12] R Crash Course 
+\item[May 26] PaLib
+\item[June 23] PaLib Continued, Climate-Box-Model, Waves
+\item[June 30] Brownian Motion
+\end{description}
+
+\section*{Exam}
+The exam is based on the problems from Ex. 1-9 as well as the lecture material.
+20\% of final grade based on Exercises, 80\% on the exam.
+
+Date (Tentative): July 29, $10^{00}-12^{00}$
+
+\section*{Resources}
+\begin{tabular}{m{5cm} | c}
+	Course Website: \\ \url{http://www.paleodyn.net/dynamics.html} & \includegraphics[height=30pt]{CourseWebsite.png} \\
+
+\hline
+	Homework and Codes: \\ \url{https://github.com/pgierz/Dynamics2} & \includegraphics[height=30pt]{Homework.png}
+\end{tabular}
+\end{document}  

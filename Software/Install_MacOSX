@@ -1,0 +1,5 @@
+#! /bin/bash -e
+
+# P. Gierz
+# This script installs all the software for Dynamics 2.
+# You should execute it as root
