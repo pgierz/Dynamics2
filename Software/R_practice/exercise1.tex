@@ -1,0 +1,83 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+\pagestyle{fancy}
+\lhead{Dynamics 2\\Lecturer: Prof. Dr. G. Lohmann\\Due date:10.04.2011}
+\rhead{Exercise 1, Summer semester 2011\\Prof. Dr. G. Lohmann/Moritz Krieger\\04.04.2011}
+
+%opening
+\title{Exercise 1}
+%\author{ Gerrit Lohmann}
+\date{04. April 2011}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\begin{enumerate}
+
+\item Download and install the R-Software.
+\url{http://www.r-project.org/}  $\rightarrow$ Download CRAN $\rightarrow$ search a city near you
+Choose your system (Windows / Mac / Linux)
+Follow the instructions.
+\\[1ex]
+
+\item Create a vector $t$  "t$<$-seq(-2*pi,2*pi,by=0.01)"
+plot several functions in one window ($\sin(t), \cos(t), \exp(\frac t 5), (\frac t 5)^2, (\frac t 5)^3$). Try some of the plot arguments: Set ylim, label the axes, set a different colour for each function, vary the line width. Save the plot as a figure. \\
+For help try "?plot" or "?plot.default"
+
+\textit{ 3 points} \\[2ex]
+
+\item Set up a vector of length 20 and create a vector b with a linear relationship to a (e.g. $a=3b+7$).
+Calculate the correlation("cor(a,b)").
+
+\textit{ 1 point} \\[2ex]
+
+\item Set up two random vectors a,b of length 20 and calculate the correlation. Repeat this procedure several times to get a feeling for the correlation coefficient.
+Than vary the length of vector a and b (vary the sample number) and discuss how the correlation coefficient changes (e.g. 10,50,100,1000). 
+
+\textit{ 2 points} \\[2ex]
+
+\item Repeat the experiment from task 4 100 times by using a loop.
+Create before the loop an empty vector ("cor.val$<$-vector()") and save the correlation of a and b in this vector (e.g. "cor.val[i]$<$-cor(a,b)") for each realisation.
+Compute the mean value and plot the histogram of cor.val. 
+What happens with the histogram when the length of a and b is varied (e.g. 10,50,100)? Save two different histograms as a figure and explain the difference between them. 
+
+\textit{ 2 points} \\[2ex]
+
+
+\item Repeat the procedure of task 5. with partly linear dependent vectors:
+("a$<$-rnorm(100); b$<$-r*a+rnorm(100)")
+Choose one value for r and shortly discuss the mean value and the histogram of cor.val compared to task 5. Save the histogram as a figure.
+
+\textit{ 2 points} \\[2ex]
+
+
+
+
+\begin{verbatim}
+	# Important R-commands
+	rnorm(N) # create vector with N normal distribution random numbers
+	cor(a,b) # calculates the correlation coefficient
+	hist(a)  # histogram of vector a 
+	mean(a)  # mean value of vector a
+
+	# Helpful introductions to R can be found in e.g.
+http://www.stat.cmu.edu/~larry/all-of-statistics/=R/Rintro.pdf
+http://cran.r-project.org/doc/manuals/R-intro.pdf
+\end{verbatim}
+\underline{Notes on submission form of the exercises:}
+ \textit{Working in study groups of two persons is encouraged, but each student should programme his/her own code.
+The programme code and the answers to the questions including the figures shall be send as one document to \url{kriegerm@uni-bremen.de} (until Sunday!).
+}
+
+\end{enumerate}
+
+
+
+
+\end{document}
+
