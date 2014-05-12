@@ -1,0 +1,197 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+
+
+\usepackage{natbib}
+\usepackage{wasysym}      % \permil
+\usepackage{graphicx}
+\usepackage{booktabs}
+\bibpunct{(}{)}{;}{a}{,}{;}
+
+
+\pagestyle{fancy}
+\lhead{Dynamics 2\\   \quad \\Due date: 12.05.2014}
+\rhead{Exercise 2, SS 2014\\Prof. Dr. G. Lohmann\\ Paul Gierz}
+
+
+%\bibpunct{(}{)}{;}{a}{,}{;}
+
+%often used special strings in normal Text
+\def\delO{$\delta^{18}$O}           % delta-18-O
+\def\delD{$\delta$D}                % delta-D
+\def\H2Oi{H$_2$$^{18}$O}            % H2-18-O
+\def\ra{$\Rightarrow$}              % =>
+\def\la{$\Leftarrow$}               % <=
+\def\deg{$^{\circ}$}                % Grad
+\def\degC{$^{\circ}$C}              % Grad Celsius
+
+%often used special strings in formula environment
+\def\fdelO{\delta^{18}\textrm{O}}   % delta-18-O
+\def\fdelD{\delta\textrm{D}}        % delta-D
+\def\fra{\Rightarrow}               % =>
+\def\fla{\Leftarrow}                % <=
+
+
+%often used structures
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+\newcommand{\Der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\Dtwo}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\Dx}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\Dt}[1]{\frac{\partial #1}{\partial t}}
+%\newcommand{\itt}{\footnotesize}
+\newcommand{\sff}{\small \sf}
+\newcommand{\itt}{\it }
+\newcommand{\itc}{\it }
+\newcommand{\dx}{\partial_x}
+\newcommand{\dy}{\partial_y}
+\newcommand{\dz}{\partial_z}
+\newcommand{\dt}{\partial_t}
+\newcommand{\ad}{{\footnotemark[2]}}
+
+
+\newcommand{\Eta}{ \boldmath E }
+\newcommand{\vbf}{ \boldsymbol }
+\newcommand{\fig}{Fig.\,}
+\newcommand{\figs}{Figs.\,}
+\renewcommand{\beq}{\begin{eqnarray*}}
+\renewcommand{\eeq}{\end{eqnarray*}}
+\renewcommand{\beqn}{\begin{eqnarray}}
+\renewcommand{\eeqn}{\end{eqnarray}}
+\newcommand{\OneMUskip}{\mskip 1mu \relax}  
+% 18mu=1em f"ur \textfont
+\newcommand{\Nat}{{\sf N\OneMUskip}}
+\newcommand{\Reals}{{\sf R\OneMUskip}}
+\newcommand{\Complex}{{\sf C\OneMUskip}}
+
+%opening
+\title{Exercise 1}
+\author{Paul Gierz}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+%
+Consider the Lorenz equations
+\begin{eqnarray*}
+\dot{x} & = & \sigma(y-x)\\
+\dot{y} & = & r x - x z -y\\
+\dot{z} & = & xy - b z
+\end{eqnarray*}
+with $\sigma, r, b >0$.
+$ \sigma $   is the Prandtl number.
+Rayleigh number  $ R_a \sim \Delta T$,  critical Rayleigh number $R_c$, and $  r=R_a/R_c   $.
+
+{\it In these equations x is proportional to the intensity of the convective motion, while y is proportional to the temperature difference between the ascending and descending currents, similar signs of x and y denoting that warm fluid is rising and cold fluid is descending. The variable z is proportional to the distortion of the vertical temperature profile from linearity, a positive value indicating that the strongest gradients occur near the boundaries. }
+ 
+ 
+ \begin{enumerate}
+
+
+  \item 
+  Equilibrium points:
+To solve for the equilibrium points we let $ f (x,y,z) = 0 $. It is clear that one of those equilibrium point is $ (0,0,0) .$ Determine the other equilibria! 
+  
+   \textit{ 2 points} \\[2ex]
+
+    \item 
+    
+  Show the  symmetry: 
+The Lorenz equation has the following symmetry of ordinary differential equation: $ (x,y,z) \rightarrow (-x,-y,z) $. This symmetry is present for all parameters of the Lorenz equation.
+
+Show the  invariance:
+The z-axis is invariant, meaning that a solution that starts on the z-axis (i.e. $ x = y = 0 $) will remain on the z-axis. In addition the solution will tend toward the origin if the initial condition are on the z-axis.
+
+ \textit{ 2 points} \\[2ex]
+
+
+ \item
+ Lorenz system has bounded solutions:
+Show that all solutions of the Lorenz equation
+will enter an ellipsoid centered at $(0,0,2r )$ in finite time, and the solution will remain inside the ellipsoid once it
+has entered. To observe this, define a Lyapunov function
+$$V(x,y,z)=r x^2 + \sigma y^2 + \sigma (z-2r )^2  \quad , $$ 
+calculate $ \dot{V}  $, 
+%
+%It then follows that
+%\begin{eqnarray*}
+%\dot{V} & = & 2\tau x\dot{x} + 2\sigma y\dot{y} + 2\sigma (z-2\tau )\dot{z}\\
+%& = & 2\tau x\sigma(y-x) + 2\sigma y(x(\tau - z) -y) + 2\sigma (z-2\tau )(xy - \beta z)\\
+%& = & -2\sigma (\tau x^2 + y^2 + \beta(z -r)^2 -b\tau^2).
+%\end{eqnarray*}
+%We then 
+%
+and choose an ellipsoid which all the solutions will enter and
+remain inside. 
+%
+This is done by choosing a constant $C>0$ such that
+the ellipsoid
+$$r x^2 + y^2 + b (z -r)^2 = b r^2$$
+is strictly contained in the ellipsoid
+$$r x^2 + \sigma y^2 + \sigma (z-2r )^2=C.$$
+
+%Therefore all solution will eventually enter and remain inside the above ellipsoid since $\dot{V}<0$ when a solution is located at the exterior of the ellipsoid.
+
+ \textit{ 3 points} \\[2ex]
+
+
+\item 
+      Please give the numerical solution in the phase space with the parameters $ r=28, \sigma=10,b=8/3. $
+
+\begin{verbatim}
+print("STRANGE ATTRACTORS - LORENZ SYSTEM")
+r=28
+s=10
+b=8/3
+dt=0.01
+x=0.1
+y=0.1
+z=0.1
+vx<-c(0)
+vy<-c(0)
+vz<-c(0)
+for(i in 1:10000){
+x1=x+s*(y-x)*dt
+y1=y+(r*x-y-x*z)*dt
+z1=z+(x*y-b*z)*dt
+vx[i]=x1
+vy[i]=y1
+vz[i]=z1
+x=x1
+y=y1
+z=z1
+}
+plot(vx,vy,type="l",xlab="x",ylab="y",main="LORENZ ATTRACTOR")
+\end{verbatim}
+
+
+ \textit{ 4 points} \\[2ex]
+
+{\it The Lorenz model may give realistic results when the Rayleigh number is slightly supercritical, but their solutions cannot be expected to resemble those of the complete dynamics when strong convection occurs, in view of the extreme truncation. 
+The same equations appeared in studies of lasers, batteries, and in a simple chaotic waterwheel that can be easily built. 
+Lorenz found that the trajectories of this system, for certain settings, never settle down to a fixed point, never approach a stable limit cycle, yet never diverge to infinity. What Lorenz discovered was at the time unheard of in the mathematical community, and was largely ignored for many years. Now this beautiful attractor is the most well known strange attractor that chaos has to offer.
+ }
+  
+
+
+\end{enumerate}
+
+%\hspace{2cm}
+\vfill
+%\hline
+\underline{Notes on submission of the exercises:}
+ \textit{
+Working in study groups  is encouraged, but each student is responsible for his/her own solution.
+Please email your own answers to the questions to Paul.Gierz@awi.de.
+}
+
+\end{document}
