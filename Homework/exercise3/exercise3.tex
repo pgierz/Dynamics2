@@ -1,0 +1,244 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+
+
+\usepackage{natbib}
+\usepackage{wasysym}      % \permil
+\usepackage{graphicx}
+\usepackage{booktabs}
+\bibpunct{(}{)}{;}{a}{,}{;}
+
+
+\pagestyle{fancy}
+\lhead{Dynamics 2\\   \quad \\Due date: 26.05.2014}
+\rhead{Exercise 3, Summer semester 2014\\Prof. Dr. G. Lohmann\\19.05.2014}
+
+
+%\bibpunct{(}{)}{;}{a}{,}{;}
+
+%often used special strings in normal Text
+\def\delO{$\delta^{18}$O}           % delta-18-O
+\def\delD{$\delta$D}                % delta-D
+\def\H2Oi{H$_2$$^{18}$O}            % H2-18-O
+\def\ra{$\Rightarrow$}              % =>
+\def\la{$\Leftarrow$}               % <=
+\def\deg{$^{\circ}$}                % Grad
+\def\degC{$^{\circ}$C}              % Grad Celsius
+
+%often used special strings in formula environment
+\def\fdelO{\delta^{18}\textrm{O}}   % delta-18-O
+\def\fdelD{\delta\textrm{D}}        % delta-D
+\def\fra{\Rightarrow}               % =>
+\def\fla{\Leftarrow}                % <=
+
+\usepackage{listings} % TeX-package for including source-code
+\usepackage{xcolor} % colors for highlighting code
+
+% Custom environments, to make it easier to include code-listings from Fortran
+% or R. Note that for Fortran it is possible to choose different dialects (we
+% use '95' here, which is the highest version that seems to be supported
+% natively by the package).
+
+
+% START: rcode
+\lstnewenvironment{rcode}
+% start
+{\lstset{language=R}}
+% end
+{}
+% END: rcode
+
+% START: fortcode
+\lstnewenvironment{fortcode}
+% start
+{\lstset{language=[95]Fortran}}
+% end
+{}
+% END: fortcode
+
+%often used structures
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+\newcommand{\Der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\Dtwo}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\Dx}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\Dt}[1]{\frac{\partial #1}{\partial t}}
+%\newcommand{\itt}{\footnotesize}
+\newcommand{\sff}{\small \sf}
+\newcommand{\itt}{\it }
+\newcommand{\itc}{\it }
+\newcommand{\dx}{\partial_x}
+\newcommand{\dy}{\partial_y}
+\newcommand{\dz}{\partial_z}
+\newcommand{\dt}{\partial_t}
+\newcommand{\ad}{{\footnotemark[2]}}
+
+
+\newcommand{\Eta}{ \boldmath E }
+\newcommand{\vbf}{ \boldsymbol }
+\newcommand{\fig}{Fig.\,}
+\newcommand{\figs}{Figs.\,}
+\renewcommand{\beq}{\begin{eqnarray*}}
+\renewcommand{\eeq}{\end{eqnarray*}}
+\renewcommand{\beqn}{\begin{eqnarray}}
+\renewcommand{\eeqn}{\end{eqnarray}}
+\newcommand{\OneMUskip}{\mskip 1mu \relax}  
+% 18mu=1em f"ur \textfont
+\newcommand{\Nat}{{\sf N\OneMUskip}}
+\newcommand{\Reals}{{\sf R\OneMUskip}}
+\newcommand{\Complex}{{\sf C\OneMUskip}}
+
+%opening
+\title{Exercise 3}
+%\author{ Gerrit Lohmann}
+%\date{27. June 2011}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+%
+%\vspace{1cm}
+
+ \begin{enumerate}
+
+\item
+{\bf Rayleigh-B\'{e}nard convection }
+Rayleigh studied the flow occurring in a layer of fluid of uniform
+depth $H$, when the temperature difference between the upper- and lower-surfaces
+is maintained at a constant value $\Delta T$.
+In the case where all motions are parallel to the $x-z$-plane, and no variations
+in the direction of the $y$-axis occur, the governing equations can be written as:
+\beqn
+    \partial_t u + u \partial_x u + w \partial_z u     & = & - \frac{1}{\rho_0} \partial_x p +        \nu \nabla^2 u  \label{eqref:einse}\\
+    \partial_t w + u \partial_x w + w \partial_z w   & = &  - \frac{1}{\rho_0} \partial_z p +        \nu \nabla^2 w + g (1- \alpha (T-T_0))
+        \label{eqref:zwei}\\
+    \partial_t T + u \partial_x T + w \partial_z T   &=&  \kappa \nabla^2 T 
+    \label{eqref:temp}\\
+    \partial_x u + \partial_z w   &= &0\label{eqref:kont}
+\eeqn
+where $w$ and $u$ are the vertical and horizontal components of the velocity,
+respectively. 
+Furthermore, 
+$ \nu = \eta/\rho_0 , \, \kappa = \lambda/(\rho_0 C_v) $ 
+the momentum diffusivity (kinematic viscosity) and thermal diffusivity, respectively.
+
+%\begin{verbatim}
+
+The R codes are 
+\begin{verbatim}
+rb_plot_functions.R; 
+rb_functions.R; 
+rayleigh-benard.R
+\end{verbatim}
+In R, you shall make
+\begin{rcode}
+source("rayleigh-benard.R")
+\end{rcode}
+and the model run will create a directory out and writes output: 
+\begin{rcode}
+#Output Parameter
+N_out = 50;
+out_dir = "./out/";	#Output directory
+\end{rcode}
+
+
+Tasks:
+ \begin{enumerate}
+ \item
+ Write down the dimensionless parameters and their relation to characteristic length and time scales charachterizing the flow!
+ \item
+Vary the Rayleigh and the Prandtl number by 
+$R_a= 20000, 40000, 60000$  and
+$Pr= 0.5, 1, 1.5, 5, 10 $ and 
+describe the dynamics (words, figures) !
+For high values of $R_a$ the spatial resolution might be chosen higher (to the double). Here are the standart values:
+\begin{rcode}
+lx 	= 100;		#Number of horizontal cells
+ly	= 52;		#Number of vertical cells
+\end{rcode}
+
+
+ \item
+Vary the initial perturbation and obtain the reversed circulation!
+Look at the line 
+
+%\begin{verbatim}
+\begin{rcode}
+#Set small trigger to break symmetry
+T[lx/2+1, 1] = 1.1 * T_bot;   
+\end{rcode}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+{\bf Ocean-like Rayleigh-B\'{e}nard convection }
+A modifies version of the first problem is an ocean box with solid walls and free slip at the surface (no friction).
+%The R codes are 
+%\begin{verbatim}
+%ocean_rb.R
+%ocean_rb_ridge.R
+%\end{verbatim}
+%In R, you shall make the files running.
+
+ \begin{enumerate}
+ \item
+Evaluate the effect of different external temperatures  (hemispheric, double hemispheric). 
+The R code is
+\begin{verbatim}
+ocean_rb.R
+\end{verbatim}
+%In R, you shall make the files running.
+
+Here are two options: 
+\begin{rcode}
+# Pre-compute imposed temperature-profile on top (linear)
+tempTop = array(0, c(lx));
+for (x in 2:lx-1) {
+  tempTop[x] = THot - (THot-TCold)*(x-2)/(lx-3);
+ }
+\end{rcode}
+for a single hemisphere, and 
+\begin{rcode}
+# Pre-compute imposed temperature-profile on top (linear+sinus)
+tempTop = array(0, c(lx));
+bett= 0.2	# right boundary
+alph= (0.1-bett)/lx ;
+gamma =1.-alph * lx/2 -bett;
+for (x in 2:lx-1) {
+	tempTop[x] = alph *x + bett + gamma * sin( 3.1416* x/lx);
+}
+\end{rcode}
+for a double hemisphere version.
+Describe the dynamics with respect tothe temperature at the top layer  tempTop !
+
+ \item
+ In lattice Boltzmann models, it is relatively easy to insert 
+obstacles. The R code is  
+\begin{verbatim}
+ocean_rb_ridge.R
+\end{verbatim}
+Discuss the influnce of the ridge on the ocean circulation!
+%In R, you shall make the files running.
+
+
+ \item
+Manage to change the Rayleigh-B\'{e}nard convection from 1. from a no-slip to   free slip bounday conditions at the top.
+The upper plate is just removed and we have an air-water interface.
+What are the differences? Make a plot!
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\end{enumerate}
+
+\end{document}
