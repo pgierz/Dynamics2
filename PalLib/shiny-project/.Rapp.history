@@ -1,0 +1,2461 @@
+for (j in 2:10)#
+Q[j] = (T_mean[1,j] - T_mean[1,j-1]) >= 1#
+while (Q[j]) #
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}
+Q[j]
+Q
+for (j in 2:10) {#
+Q[j] = (T_mean[1,j] - T_mean[1,j-1]) >= 1#
+while (Q[j]) #
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+}
+for (j in 2:10) {#
+Q[j] <- (T_mean[1,j] - T_mean[1,j-1]) >= 1#
+pause#
+while (Q[j]) #
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+}
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+T = c()#
+#
+m_cos = c()
+TSI = c()#
+T_i = c()#
+m = c()
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5
+T_matrix = matrix(nrow=9, ncol = 10)#
+Albedo_matrix = matrix(nrow=9, ncol = 10)#
+T_m_matrix = matrix(nrow=1, ncol = 10)
+for (i = 1:9) { # Breiten#
+	for (j = 1:10) { # Zeit#
+		P_in[i] = (TSI_c * TSI[i] / 4)#
+		if (T_matrix[i,j] <= T_critical) {#
+			Albedo_matrix[i,j] = alpha_s#
+			else Albedo_matrix [i,j] = alpha_lw#
+			}#
+#
+		m_cos = cos(m[i] * pi/180)#
+		sum_A = 0#
+		sum_B = 0#
+		sum_A = sum_A + (T_matrix[i,j] * m_cos[i])#
+		sum_B = sum_B + m_cos[i]#
+		T_m_matrix[1,j] = sum_A / sum_B #
+		T_matrix[i,j] = ( P_in[i] * (1-Albedo_matrix[i,j]) + K*T_m_matrix[1,j] - A ) / (B + K)#
+	}#
+}
+for (i=1:9) { # Breiten#
+	for (j=1:10) { # Zeit#
+		P_in[i] = (TSI_c * TSI[i] / 4)#
+		if (T_matrix[i,j] <= T_critical) {#
+			Albedo_matrix[i,j] = alpha_s#
+			else Albedo_matrix [i,j] = alpha_lw#
+			}#
+#
+		m_cos = cos(m[i] * pi/180)#
+		sum_A = 0#
+		sum_B = 0#
+		sum_A = sum_A + (T_matrix[i,j] * m_cos[i])#
+		sum_B = sum_B + m_cos[i]#
+		T_m_matrix[1,j] = sum_A / sum_B #
+		T_matrix[i,j] = ( P_in[i] * (1-Albedo_matrix[i,j]) + K*T_m_matrix[1,j] - A ) / (B + K)#
+	}#
+}
+for (i in 1:9) { # Breiten#
+	for (j in 1:10) { # Zeit#
+		P_in[i] = (TSI_c * TSI[i] / 4)#
+		if (T_matrix[i,j] <= T_critical) {#
+			Albedo_matrix[i,j] = alpha_s#
+			else Albedo_matrix [i,j] = alpha_lw#
+			}#
+#
+		m_cos = cos(m[i] * pi/180)#
+		sum_A = 0#
+		sum_B = 0#
+		sum_A = sum_A + (T_matrix[i,j] * m_cos[i])#
+		sum_B = sum_B + m_cos[i]#
+		T_m_matrix[1,j] = sum_A / sum_B #
+		T_matrix[i,j] = ( P_in[i] * (1-Albedo_matrix[i,j]) + K*T_m_matrix[1,j] - A ) / (B + K)#
+	}#
+}
+T_matrix = matrix(nrow=9, ncol = 10)#
+Albedo_matrix = matrix(nrow=9, ncol = 10)#
+T_m_matrix = matrix(nrow=1, ncol = 10)#
+for (i in 1:9) { # Breiten#
+	for (j in 1:10) { # Zeit#
+		P_in[i] = (TSI_c * TSI[i] / 4)#
+		if (T_matrix[i,j] <= T_critical) {#
+			Albedo_matrix[i,j] = alpha_s#
+			else {Albedo_matrix[i,j] = alpha_lw}}#
+			}#
+#
+		m_cos = cos(m[i] * pi/180)#
+		sum_A = 0#
+		sum_B = 0#
+		sum_A = sum_A + (T_matrix[i,j] * m_cos[i])#
+		sum_B = sum_B + m_cos[i]#
+		T_m_matrix[1,j] = sum_A / sum_B #
+		T_matrix[i,j] = ( P_in[i] * (1-Albedo_matrix[i,j]) + K*T_m_matrix[1,j] - A ) / (B + K)#
+	}#
+}
+for (i in 1:9) { # Breiten#
+	for (j in 1:10) { # Zeit#
+		P_in[i] = (TSI_c * TSI[i] / 4)#
+		{if (T_matrix[i,j] <= T_critical) {#
+			Albedo_matrix[i,j] = alpha_s}#
+			else {Albedo_matrix[i,j] = alpha_lw}#
+			}#
+		m_cos = cos(m[i] * pi/180)#
+		sum_A = 0#
+		sum_B = 0#
+		sum_A = sum_A + (T_matrix[i,j] * m_cos[i])#
+		sum_B = sum_B + m_cos[i]#
+		T_m_matrix[1,j] = sum_A / sum_B #
+		T_matrix[i,j] = ( P_in[i] * (1-Albedo_matrix[i,j]) + K*T_m_matrix[1,j] - A ) / (B + K)#
+	}#
+}
+T_critical
+T_matrix
+T_matrix[1,] = T_i
+T_matrix[1,] = T_i[]
+T_matrix[1,] = T_i[1:9,]
+T_i
+T[1,]
+T[1,:]
+T[1,1:10]
+T[]
+T_matrix[1,]
+T_matrix[1,] = T_i
+T_i
+T_matrix[1,1] = T_i[1]#
+T_matrix[2,1] = T_i[2]#
+T_matrix[3,1] = T_i[3]#
+T_matrix[4,1] = T_i[4]#
+T_matrix[5,1] = T_i[5]#
+T_matrix[6,1] = T_i[6]#
+T_matrix[7,1] = T_i[7]#
+T_matrix[8,1] = T_i[8]#
+T_matrix[9,1] = T_i[9]
+T_matrix[1,]
+T_i[2]
+T_i[3]
+T[,1]
+T_matrix[,1]
+T_matrix
+for (j in 1:9) { # Breiten#
+	for (i in 1:10) { # Zeit#
+		P_in[i] = (TSI_c * TSI[i] / 4)#
+		{if (T_matrix[i,j] <= T_critical) {#
+			Albedo_matrix[i,j] = alpha_s}#
+			else {Albedo_matrix[i,j] = alpha_lw}#
+			}#
+		m_cos = cos(m[i] * pi/180)#
+		sum_A = 0#
+		sum_B = 0#
+		sum_A = sum_A + (T_matrix[i,j] * m_cos[i])#
+		sum_B = sum_B + m_cos[i]#
+		T_m_matrix[1,j] = sum_A / sum_B #
+		T_matrix[i,j] = ( P_in[i] * (1-Albedo_matrix[i,j]) + K*T_m_matrix[1,j] - A ) / (B + K)#
+	}#
+}
+for (j in 1:9) { # Breiten#
+	for (i in 1:10) { # Zeit#
+		P_in[j] = (TSI_c * TSI[j] / 4)#
+		{if (T_matrix[i,j] <= T_critical) {#
+			Albedo_matrix[i,j] = alpha_s}#
+			else {Albedo_matrix[i,j] = alpha_lw}#
+			}#
+		m_cos = cos(m[j] * pi/180)#
+		sum_A = 0#
+		sum_B = 0#
+		sum_A = sum_A + (T_matrix[i,j] * m_cos[j])#
+		sum_B = sum_B + m_cos[j]#
+		T_m_matrix[1,j] = sum_A / sum_B #
+		T_matrix[i,j] = ( P_in[j] * (1-Albedo_matrix[i,j]) + K*T_m_matrix[1,j] - A ) / (B + K)#
+	}#
+}
+T_matrix
+T_critical
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}
+P_in
+m_cos
+sum_1
+sum_2
+T_m = sum_1 / sum_2
+T_m
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}
+T
+P_in
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4
+alpha_ggw = c()
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4
+T_mggw
+T_mean = matrix(nrow = 1, ncol = 5000)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw
+T_mean[1,1:10]
+for (j in 3:10) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+}
+T_mean
+T_mean[1,1:10]
+T[1,1:11]
+T_mean[1,1:11]
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+}
+T_mean
+plot(T_mean)
+plot(T_mean[1,])
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 500 #1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+}
+plot(T_mean[1,])
+######### Aufgabe 3#
+#
+# Um die Erde vollständig mit Eis zu bedecken, muss die Wärmste Breite auf 0 Grad sein - In unserem Programm ist das Zone 9. Jetzt mussen wir T[9] = 0 setzten und rückwerts rechnen.#
+#
+T_ice = c()#
+alpha_ice = c()#
+#
+T_noice = c()#
+alpha_noice = c()#
+#
+T_ice[1] = -15-24#
+T_ice[2] = -15-24#
+T_ice[3] = -5-24#
+T_ice[4] = 5-24#
+T_ice[5] = 10-24#
+T_ice[6] = 15-24#
+T_ice[7] = 18-24#
+T_ice[8] = 22-24#
+T_ice[9] = 24-24#
+#
+sum_ice1 = 0#
+sum_ice2 = 0#
+#
+for (i in 1:9) {#
+	{if (T_ice[i] < T_critical) alpha_ice[i] = alpha_s#
+	else alpha_ice[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_ice1 = sum_ice1 + (T_i[i] * m_cos[i])#
+	sum_ice2 = sum_ice2 + m_cos[i]#
+	}#
+#
+T_m_ice = sum_ice1 / sum_ice2#
+#
+TSI_ice = (4/TSI[9]) * ((T_ice[9] * (B+K) - K * T_m_ice + A)/(1-alpha_ice))#
+TSI_ice_factor = min(TSI_ice) / 1370#
+#
+T_noice = c()#
+#
+T_noice[1] = -15+15#
+T_noice[2] = -15+15#
+T_noice[3] = -5+15#
+T_noice[4] = 5+15#
+T_noice[5] = 10+15#
+T_noice[6] = 15+15#
+T_noice[7] = 18+15#
+T_noice[8] = 22+15#
+T_noice[9] = 24+15#
+#
+sum_noice1 = 0#
+sum_noice2 = 0#
+#
+for (i in 1:9) {#
+	{if (T_noice[i] < T_critical) alpha_noice[i] = alpha_s#
+	else alpha_noice[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_noice1 = sum_noice1 + (T_i[i] * m_cos[i])#
+	sum_noice2 = sum_noice2 + m_cos[i]#
+	}#
+#
+T_m_noice = sum_noice1 / sum_noice2#
+#
+TSI_noice = (4/TSI[1]) * ((T_noice[1] * (B+K) - K * T_m_noice + A)/(1-alpha_noice))#
+TSI_noice_factor = min(TSI_noice) / 1370
+TSI_noice_factor
+TSI_ice_factor
+help(stop)
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	#if (T_mean[1,j] = 14#
+}
+T_mean
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	if (T_mean[1,j] = 14.8724) stop#
+}
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	if (T_mean[1,j] >= 14.8724) stop#
+}
+T_mean
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	if (T_mean[1,j] >= 14.8724) stop#
+}
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha = c()#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	if (T_mean[1,j] >= 14.8724) stop#
+}
+T_mean
+help(stop)
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha = c()#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+#
+T_i[1] = -15#
+T_i[2] = -15#
+T_i[3] = -5#
+T_i[4] = 5#
+T_i[5] = 10#
+T_i[6] = 15#
+T_i[7] = 18#
+T_i[8] = 22#
+T_i[9] = 24#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	if (T_mean[1,j] >= 14.8724) stop("Ende")#
+}
+T_mean
+T
+59/9
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha = c()#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+# 59#
+#
+T_i[1] = 6.5#
+T_i[2] = 6.5#
+T_i[3] = 6.5#
+T_i[4] = 6.5#
+T_i[5] = 6.5#
+T_i[6] = 6.5#
+T_i[7] = 6.5#
+T_i[8] = 6.5#
+T_i[9] = 6.5#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	if (T_mean[1,j] >= 14.8724) stop("Ende")#
+}
+T_mean
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha = c()#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+# 59#
+#
+T_i[1] = 6.5#
+T_i[2] = 6.5#
+T_i[3] = 6.5#
+T_i[4] = 6.5#
+T_i[5] = 6.5#
+T_i[6] = 6.5#
+T_i[7] = 6.5#
+T_i[8] = 0#
+T_i[9] = 6.5#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	#if (T_mean[1,j] >= 14.8724) stop("Ende")#
+}
+T_mean
+#### Aufgabe 4#
+#
+#### Klima 4 1D Energiemodel#
+#
+#Parameter#
+#
+A = 204#
+#
+B = 2.17#
+#
+K = 3.86#
+#
+TSI_c = 1370#
+#
+alpha = c()#
+#
+alpha_s = 0.6#
+#
+alpha_lw = 0.3#
+#
+T_critical = -10#
+#
+# Gleichungen#
+#
+P_in = c()#
+#
+alpha_ggw = c()#
+#
+T = c()#
+#
+m_cos = c()#
+#
+####################
+#
+# Zonen#
+#
+TSI = c()#
+T_i = c()#
+m = c()#
+#
+TSI[1] = 0.5#
+TSI[2] = 0.53#
+TSI[3] = 0.624#
+TSI[4] = 0.77#
+TSI[5] = 0.892#
+TSI[6] = 1.021#
+TSI[7] = 1.12#
+TSI[8] = 1.189#
+TSI[9] = 1.219#
+# 59#
+#
+T_i[1] = 59#
+T_i[2] = 0#
+T_i[3] = 0#
+T_i[4] = 0#
+T_i[5] = 0#
+T_i[6] = 0#
+T_i[7] = 0#
+T_i[8] = 0#
+T_i[9] = 0#
+#
+m[1] = 85#
+m[2] = 75 #
+m[3] = 65#
+m[4] = 55#
+m[5] = 45#
+m[6] = 35#
+m[7] = 25#
+m[8] = 15#
+m[9] = 5#
+########### Aufgabe 1 ############
+#
+sum_1 = 0#
+sum_2 = 0#
+for (i in 1:9) {#
+	P_in[i] = ((TSI_c/4) * TSI[i])#
+	{if (T_i[i] < T_critical) alpha[i] = alpha_s#
+	else alpha[i] = alpha_lw}#
+#
+	m_cos[i] = cos(m[i] * (pi/180))#
+#
+	sum_1 = sum_1 + (T_i[i] * m_cos[i])#
+	sum_2 = sum_2 + m_cos[i]#
+}#
+#
+T_m = sum_1 / sum_2#
+#
+for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_m - A) / (B + K)#
+}#
+sum_3 = 0#
+sum_4 = 0#
+#
+for (g in 1:9) {#
+	m_cos[g] = cos(m[g] * (pi/180))#
+#
+	sum_3 = sum_3 + (T[g] * m_cos[g])#
+	sum_4 = sum_4 + m_cos[g]#
+	{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+	else alpha_ggw[g] = alpha_lw}	#
+}#
+	T_mggw = sum_3 / sum_4#
+T_mean = matrix(nrow = 1, ncol = 100)#
+T_mean[1,1] = T_m	#
+T_mean[1,2] = T_mggw#
+#####################
+for (j in 3:100) {#
+	{#
+	for (z in 1:9) {#
+	T[z] = (P_in[z] * (1-alpha[z]) + K * T_mean[1,j-1] - A) / (B + K)}#
+	sum_3 = 0#
+	sum_4 = 0#
+#
+	for (g in 1:9) {#
+		m_cos[g] = cos(m[g] * (pi/180))#
+#
+		sum_3 = sum_3 + (T[g] * m_cos[g])#
+		sum_4 = sum_4 + m_cos[g]#
+		{if (T[g] < T_critical) alpha_ggw[g] = alpha_s#
+		else alpha_ggw[g] = alpha_lw}#
+		T_mean[1,j] = sum_3/sum_4	#
+		}		#
+	}#
+	#if (T_mean[1,j] >= 14.8724) stop("Ende")#
+}
+T_mean
+log(e)
+log(0.995)
+log(0.995)/((-10E-17)*(500))
+(4000 * 10E-6) / ((1.38E-23) * 253.15)
+1E11 / 1E19
+100250836471/1.144993e+19
+#Nukleation Übung 1#
+##
+# 1A#
+# Atmosphärische Teilchenbildung: Gasen/Gasemoleküle wachsen zu einem Partikel#
+# Wolkentropfenbildung: andere Grössenordnung, Aerosolpartikel schon vorgeformt#
+# Primäre Aerosolpartikel: Bereits vorhandene Teilchen werden in die Atmosphäre getreiben#
+##
+##
+# 1B#
+##
+##
+# 2#
+D_p = 2E-9 #10E-9, 50E-9, 1000E-9 # [nm]#
+T = 283.15 # [K]#
+D_p_schwefel = 0.55 # [nm]#
+D_p_org = 0.865 # [nm]#
+k_B = 1.38E-23 # [J/K]#
+l_p = 65E-9 # [m]#
+alpha = 1 # [-]#
+m = 6.55E-26 # [kg]#
+mu = 1.875E-5 * (0.55*291.15+120)/(0.555*T+120) * (T/291.15)^(3/2)#
+mu#
+A_1 = 1.257#
+A_2 = 0.400#
+A_3 = 0.55#
+C_c = 1 + ((2*l_p)/D_p) * (A_1 + A_2^((-A_3*D_p)/l_p))#
+C_c#
+f = 3*pi*mu*D_p / C_c#
+f#
+D_i = k_B * mu * T / C_c#
+D_i
+D_p = 0.55E-9 #10E-9, 50E-9, 1000E-9 # [nm]#
+T = 283.15 # [K]#
+D_p_schwefel = 0.55 # [nm]#
+D_p_org = 0.865 # [nm]#
+k_B = 1.38E-23 # [J/K]#
+l_p = 65E-9 # [m]#
+alpha = 1 # [-]#
+m = 6.55E-26 # [kg]#
+mu = 1.875E-5 * (0.55*291.15+120)/(0.555*T+120) * (T/291.15)^(3/2)#
+mu#
+A_1 = 1.257#
+A_2 = 0.400#
+A_3 = 0.55#
+C_c = 1 + ((2*l_p)/D_p) * (A_1 + A_2^((-A_3*D_p)/l_p))#
+C_c#
+f = 3*pi*mu*D_p / C_c#
+f#
+D_i = k_B * mu * T / C_c#
+D_i
+D_i_schwefel = D_i
+D_i_schwefel
+D_p = 2E-9 #10E-9, 50E-9, 1000E-9 # [nm]#
+T = 283.15 # [K]#
+D_p_schwefel = 0.55 # [nm]#
+D_p_org = 0.865 # [nm]#
+k_B = 1.38E-23 # [J/K]#
+l_p = 65E-9 # [m]#
+alpha = 1 # [-]#
+m = 6.55E-26 # [kg]#
+mu = 1.875E-5 * (0.55*291.15+120)/(0.555*T+120) * (T/291.15)^(3/2)#
+mu#
+A_1 = 1.257#
+A_2 = 0.400#
+A_3 = 0.55#
+C_c = 1 + ((2*l_p)/D_p) * (A_1 + A_2^((-A_3*D_p)/l_p))#
+C_c#
+f = 3*pi*mu*D_p / C_c#
+f#
+D_i = k_B * mu * T / C_c#
+D_i_a = D_i
+D_i_a
+D_p = 10E-9 #, 50E-9, 1000E-9 # [nm]#
+T = 283.15 # [K]#
+D_p_schwefel = 0.55 # [nm]#
+D_p_org = 0.865 # [nm]#
+k_B = 1.38E-23 # [J/K]#
+l_p = 65E-9 # [m]#
+alpha = 1 # [-]#
+m = 6.55E-26 # [kg]#
+mu = 1.875E-5 * (0.55*291.15+120)/(0.555*T+120) * (T/291.15)^(3/2)#
+mu#
+A_1 = 1.257#
+A_2 = 0.400#
+A_3 = 0.55#
+C_c = 1 + ((2*l_p)/D_p) * (A_1 + A_2^((-A_3*D_p)/l_p))#
+C_c#
+f = 3*pi*mu*D_p / C_c#
+f#
+D_i = k_B * mu * T / C_c#
+D_i_b = D_i
+D_i_b
+D_p = 50E-9 #1000E-9 # [nm]#
+T = 283.15 # [K]#
+D_p_schwefel = 0.55 # [nm]#
+D_p_org = 0.865 # [nm]#
+k_B = 1.38E-23 # [J/K]#
+l_p = 65E-9 # [m]#
+alpha = 1 # [-]#
+m = 6.55E-26 # [kg]#
+mu = 1.875E-5 * (0.55*291.15+120)/(0.555*T+120) * (T/291.15)^(3/2)#
+mu#
+A_1 = 1.257#
+A_2 = 0.400#
+A_3 = 0.55#
+C_c = 1 + ((2*l_p)/D_p) * (A_1 + A_2^((-A_3*D_p)/l_p))#
+C_c#
+f = 3*pi*mu*D_p / C_c#
+f#
+D_i = k_B * mu * T / C_c#
+D_i_c = D_i
+D_p = 1000E-9 # [nm]#
+T = 283.15 # [K]#
+D_p_schwefel = 0.55 # [nm]#
+D_p_org = 0.865 # [nm]#
+k_B = 1.38E-23 # [J/K]#
+l_p = 65E-9 # [m]#
+alpha = 1 # [-]#
+m = 6.55E-26 # [kg]#
+mu = 1.875E-5 * (0.55*291.15+120)/(0.555*T+120) * (T/291.15)^(3/2)#
+mu#
+A_1 = 1.257#
+A_2 = 0.400#
+A_3 = 0.55#
+C_c = 1 + ((2*l_p)/D_p) * (A_1 + A_2^((-A_3*D_p)/l_p))#
+C_c#
+f = 3*pi*mu*D_p / C_c#
+f#
+D_i = k_B * mu * T / C_c#
+D_i_d= D_i
+D_i_check = c(D_i_a,D_i_b,D_i_c,D_i_d)
+D_i_check
+# 3#
+D_p = 0.5E-9#
+#
+Beta_1 = pi*(D_i_schwefel+D_i_a)*(D_p+2E-9)#
+Beta_2 = pi*(D_i_schwefel+D_i_b)*(D_p+10E-9)#
+Beta_3 = pi*(D_i_schwefel +D_i_c)*(D_p+50E-9)#
+Beta_4 = pi*(D_i_schwefel +D_i_d)*(D_p+1000E-9)
+Beta_1
+3exp(2)
+3E2
+3^3
+3^(1+1)
+Mu_F = function(T) {#
+	(1.875*10^-5) * ((0.555*291.15+120)/(0.555*T + 120)) * 			(((T)/(291.15))^(3/2))#
+	}#
+f_F = function(mu, D_p, C_c) {#
+	(3*pi*D_p)/(C_c)#
+	}#
+C_c_F = function(l_p, D_p) {#
+	A_1 = 1.257#
+	A_2 = 0.400#
+	A_3 = 0.55#
+	1+((2*l_p)/(D_p)) * (A_1 + A_2^((-A_3*D_p)/(l_p)))#
+	}#
+#
+D_i_F = function(T,f) {#
+	(((1.38*10^-23)*T)/(f))#
+	}
+mu_ev = Mu_F(283.15)
+mu_ev
+mu = mu_ev
+C_c = C_c_F((65E-9),(2E-9))
+C_c
+1:6
+A=1:6
+A[3]
+A[3]-1
+}
+# Paul Gierz#
+# Nukleation Übung 1#
+#
+## Create Functions#
+#
+Mu_F = function(T) {#
+	(1.875*10^-5) * ((0.555*291.15+120)/(0.555*T + 120)) * 			(((T)/(291.15))^(3/2))#
+	}#
+f_F = function(mu, D_p, C_c) {#
+	(3*pi*D_p)/(C_c)#
+	}#
+C_c_F = function(l_p, D_p) {#
+	A_1 = 1.257#
+	A_2 = 0.400#
+	A_3 = 0.55#
+	1+((2*l_p)/(D_p)) * (A_1 + A_2^((-A_3*D_p)/(l_p)))#
+	}#
+#
+D_i_F = function(T,f) {#
+	(((1.38*10^-23)*T)/(f))#
+	}#
+# Variable Names "T", "mu", "D_p", "C_c", "l_p", "f"#
+#
+T = 283.15#
+l_p = 65E-9#
+#
+D_p = c(2E-9,10E-9,50E-9,1000E-9, 0.55E-9, 0.865E-9)#
+D_i = c(0,0,0,0,0,0)#
+#
+for (i in c(1:6)) {#
+	mu = Mu_F(T)#
+	C_c = C_c_F(mu,D_p[i])#
+	f = f_F(mu,D_p[i],C_c)#
+	D_i_t = D_i_F(T,f)#
+	D_i[i] = D_i_t#
+}
+D_i
+dir()
+ls()
+Rapp.update()
+x=c(1,2,3,4,5)
+plot(x, col = 1)
+plot(x, col = 2)
+plot(x, col = 3)
+plot(x, col = 4)
+plot(x, col = 5)
+plot(x, col = 6)
+plot(x, col = 7)
+plot(x, col = 8)
+plot(x, col = 5)
+getwd()
+setwd("/Users/Gierz/Documents/Uni/Frankfurt/3 WS 2010:12/Forschungsprojekt/Daten_Taunus/2010")
+seq(1,5,1)
+seq(1,5,2)
+Dp = seq(50E-9, 1E-6, 1e-8)
+Dp
+1E-8
+10^-8
+sigma1 = 0.0714 # N/m2#
+sigma2 = 0.0645 # N/m2#
+sigmawater = 0.074 # N/m2#
+R = 8.3144 # J/K mol#
+Xi = 1#
+xi = 0.003#
+v_mol_water = 1.8E-5#
+p_o = 61.07#
+T = 0+273.15#
+#
+Dp = seq(50E-9, 1E-6, 1e-8)#
+#
+xiA = 1 - (xi * (1E-8/Dp)^3)#
+xiB = 1 - (xi * (1E-8/Dp)^3)
+p_satA = p_o * exp((4*sigma * v_mol_water) /(R*T*D_p)) * Xi * xiA#
+#
+p_satB = p_o * exp((4*sigma * v_mol_water) /(R*T*D_p)) * Xi * xiB
+p_satA = p_o * exp((4*sigma1 * v_mol_water) /(R*T*D_p)) * Xi * xiA#
+#
+p_satB = p_o * exp((4*sigma2 * v_mol_water) /(R*T*D_p)) * Xi * xiB
+p_satA = p_o * exp((4*sigma1 * v_mol_water) /(R*T*Dp)) * Xi * xiA#
+#
+p_satB = p_o * exp((4*sigma2 * v_mol_water) /(R*T*Dp)) * Xi * xiB
+p_satA
+p_satB
+plot(p_satA)
+CO2 = /Users/Gierz/Documents/Uni/AWI/RPC6M.txt
+CO2 = read.table(file = "/Users/Gierz/Documents/Uni/AWI/RPC6M.txt")
+plot(CO2)
+CO2
+as.numeric(CO2)
+CO2[1,]
+CO2[,1]
+CO2 = CO2[,1]
+CO2
+plot(CO2)
+quit()
+update()
+update()R
+update(R)
+update.packages()
+clear
+clear()
+RPC4.5s=read.table(/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt)
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")
+RPC4.5s
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")
+plot(RPC6f)
+as.numeric(RPC6f)
+typeof(RPC6f)
+as.numeric(RPC6f[1,])
+RPC6f[1]
+RPC6f[,1]
+plot(RPC6f[,1])
+history
+history()
+?plot
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+quartz()#
+plot(RPC4.5s, type = "p", cex = 0.5, pch = 0)#
+points(RPC4.5m, type = "p", cex = 0.5, pch = 1)#
+points(RPC4.5f, type = "p", cex = 0.5, pch = 2)#
+points(RPC6s, type = "p", cex = 0.5, pch = 3)#
+points(RPC6m, type = "p", cex = 0.5, pch = 4)#
+points(RPC6f, type = "p", cex = 0.5, pch = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+quartz()#
+plot(RPC4.5s, type = "p", cex = 0.5, pch = 0, ylim = c(200,900)#
+points(RPC4.5m, type = "p", cex = 0.5, pch = 1)#
+points(RPC4.5f, type = "p", cex = 0.5, pch = 2)#
+points(RPC6s, type = "p", cex = 0.5, pch = 3)#
+points(RPC6m, type = "p", cex = 0.5, pch = 4)#
+points(RPC6f, type = "p", cex = 0.5, pch = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+quartz()#
+plot(RPC4.5s, type = "p", cex = 0.5, pch = 0, ylim = c(200,900))#
+points(RPC4.5m, type = "p", cex = 0.5, pch = 1)#
+points(RPC4.5f, type = "p", cex = 0.5, pch = 2)#
+points(RPC6s, type = "p", cex = 0.5, pch = 3)#
+points(RPC6m, type = "p", cex = 0.5, pch = 4)#
+points(RPC6f, type = "p", cex = 0.5, pch = 5)
+?jitter
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+quartz()#
+plot(jitter(RPC4.5s), type = "p", cex = 0.5, pch = 0, ylim = c(200,900))#
+points(jitter(RPC4.5m), type = "p", cex = 0.5, pch = 1)#
+points(jitter(RPC4.5f), type = "p", cex = 0.5, pch = 2)#
+points(jitter(RPC6s), type = "p", cex = 0.5, pch = 3)#
+points(jitter(RPC6m), type = "p", cex = 0.5, pch = 4)#
+points(jitter(RPC6f), type = "p", cex = 0.5, pch = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+quartz()#
+plot(jitter(RPC4.5s, factor = 2), type = "p", cex = 0.5, pch = 0, ylim = c(200,900))#
+points(jitter(RPC4.5m, factor = 2), type = "p", cex = 0.5, pch = 1)#
+points(jitter(RPC4.5f, factor = 2), type = "p", cex = 0.5, pch = 2)#
+points(jitter(RPC6s, factor = 2), type = "p", cex = 0.5, pch = 3)#
+points(jitter(RPC6m, factor = 2), type = "p", cex = 0.5, pch = 4)#
+points(jitter(RPC6f, factor = 2), type = "p", cex = 0.5, pch = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+n = 10#
+#
+quartz()#
+plot(jitter(RPC4.5s, factor = n), type = "p", cex = 0.5, pch = 0, ylim = c(200,900))#
+points(jitter(RPC4.5m, factor = n), type = "p", cex = 0.5, pch = 1)#
+points(jitter(RPC4.5f, factor = n), type = "p", cex = 0.5, pch = 2)#
+points(jitter(RPC6s, factor = n), type = "p", cex = 0.5, pch = 3)#
+points(jitter(RPC6m, factor = n), type = "p", cex = 0.5, pch = 4)#
+points(jitter(RPC6f, factor = n), type = "p", cex = 0.5, pch = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+n = 0#
+#
+quartz()#
+plot(jitter(RPC4.5s, factor = n), type = "p", cex = 0.5, pch = 0, ylim = c(200,900))#
+points(jitter(RPC4.5m + 10, factor = n), type = "p", cex = 0.5, pch = 1)#
+points(jitter(RPC4.5f + 20, factor = n), type = "p", cex = 0.5, pch = 2)#
+points(jitter(RPC6s, factor = n), type = "p", cex = 0.5, pch = 3)#
+points(jitter(RPC6m + 10, factor = n), type = "p", cex = 0.5, pch = 4)#
+points(jitter(RPC6f + 20, factor = n), type = "p", cex = 0.5, pch = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+n = 0#
+#
+quartz()#
+plot(jitter(RPC4.5s, factor = n), type = "p", cex = 0.5, pch = 0, ylim = c(200,900))#
+points(jitter(RPC4.5m + 1, factor = n), type = "p", cex = 0.5, pch = 1)#
+points(jitter(RPC4.5f + 2, factor = n), type = "p", cex = 0.5, pch = 2)#
+points(jitter(RPC6s, factor = n), type = "p", cex = 0.5, pch = 3)#
+points(jitter(RPC6m + 1, factor = n), type = "p", cex = 0.5, pch = 4)#
+points(jitter(RPC6f + 2, factor = n), type = "p", cex = 0.5, pch = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+n = 0#
+#
+quartz()#
+plot(jitter(RPC4.5s, factor = n), type = "p", cex = 0.5, pch = 0, ylim = c(200,900), col = 0)#
+points(jitter(RPC4.5m + 10, factor = n), type = "p", cex = 0.5, pch = 1, col = 1)#
+points(jitter(RPC4.5f + 20, factor = n), type = "p", cex = 0.5, pch = 2, col = 2)#
+points(jitter(RPC6s, factor = n), type = "p", cex = 0.5, pch = 3, col = 3)#
+points(jitter(RPC6m + 10, factor = n), type = "p", cex = 0.5, pch = 4, col = 4)#
+points(jitter(RPC6f + 20, factor = n), type = "p", cex = 0.5, pch = 5, col = 5)
+setwd()#
+#
+RPC4.5s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5s.txt")#
+RPC4.5m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5m.txt")#
+RPC4.5f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC4.5f.txt")#
+RPC6s=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6s.txt")#
+RPC6m=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6m.txt")#
+RPC6f=read.table("/Users/Gierz/Documents/Uni/AWI/Data/RPC6f.txt")#
+#
+RPC4.5s = RPC4.5s[,1]#
+RPC4.5m = RPC4.5m[,1]#
+RPC4.5f = RPC4.5f[,1]#
+RPC6s = RPC6s[,1]#
+RPC6m = RPC6m[,1]#
+RPC6f = RPC6f[,1]#
+#
+n = 0#
+#
+quartz()#
+plot(jitter(RPC4.5s, factor = n), type = "p", cex = 0.5, pch = 0, ylim = c(200,900), col = 1)#
+points(jitter(RPC4.5m + 10, factor = n), type = "p", cex = 0.5, pch = 1, col = 2)#
+points(jitter(RPC4.5f + 20, factor = n), type = "p", cex = 0.5, pch = 2, col = 3)#
+points(jitter(RPC6s, factor = n), type = "p", cex = 0.5, pch = 3, col = 4)#
+points(jitter(RPC6m + 10, factor = n), type = "p", cex = 0.5, pch = 4, col = 5)#
+points(jitter(RPC6f + 20, factor = n), type = "p", cex = 0.5, pch = 5, col = 6)
+RPC4.5s[500]
+RPC4.5f[500]
+source("/Users/Gierz/Documents/Uni/AWI/Scripts/R_Scripts/Cats.R")
+events.rates
+event.rates
+hist(rnorm(100))
+hist(rnorm(100000))
+hist(rnorm(1000000))
+hist(rnorm(100) + rnorm(100))
+source("copula")
+?install.packages()
+install.packages("shiny")
+library(shiny)
+pwd
+getwd()
+setwd("/Users/Gierz/Documents/Uni/Doktor/")
+setwd("/Users/Gierz/Documents/Uni/Doktor/Teaching/Dynamics2/")
+dir()
+setwd("/")
+dir()
+setwd("/Volumes/csys_paleo2/pgierz/Teaching/Dynamics2/PalLib/")
+dir()
+setwd("shiny-project/")
+dir()
+runApp(".")
+install.packages("chron")
+runApp(".")
+install.packages("clim.pact")
+install.packages("/Users/Gierz/Documents/Uni/Doktor/Teaching/Dynamics2/Software/clim.pact_2.3-10.tar")
+install.packages("/Users/Gierz/Documents/Uni/Doktor/Teaching/Dynamics2/Software/clim.pact_2.3-10.tar.gz")
+install.packages("/Users/Gierz/Documents/Uni/Doktor/Teaching/Dynamics2/Software/clim.pact_2.3-10.tar.gz", repos=NULL, type = "source")
+install.packages("/Users/Gierz/Documents/Uni/Doktor/Teaching/Dynamics2/Software/clim.pact_2.3-10.tar", repos=NULL, type = "source")
+install.packages("ncdf")
+install.packages("akima")
+install.packages("ncdf")
+install.packages("ncdf4")
+install.packages("ncdf", type = "source")
+setwd()
+setwd("~")
+getwd()
+install.packages("ncdf", type = "source")
+install.packages("/Users/Gierz/Documents/Uni/Doktor/Teaching/Dynamics2/Software/clim.pact_2.3-10.tar", repos=NULL, type = "source")
+install.packages("ncdf", type = "source")
+setwd("Documents/Uni/Doktor/Teaching/Dynamics2/PalLib/shiny-project/")
+library(shiny)
+runApp(".")

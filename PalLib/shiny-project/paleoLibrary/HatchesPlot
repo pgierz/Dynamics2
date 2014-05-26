@@ -1,0 +1,53 @@
+#Monsoon + Ice Hatches Plot, plots slopefield from Jan08\ReadAndPlotPolynom05.R
+rm(list=ls())
+drive<-"c:"
+path<-"c:/data/paleoLibrary/"
+source(paste(path,"header.R",sep=""))
+
+ice.7k.annual.5<-read_ncep(paste(drive,"/data/HOLOCENE/7K/icevars.annual.5x5.nc",sep=""),varname="seaice",name="seaice 7K annual mean")
+ice.pi.annual.5<-read_ncep(paste(drive,"/data/HOLOCENE/PI/icevars.annual.5x5.nc",sep=""),varname="seaice",name="seaice PI annual mean")
+
+
+t1<-applytime(ice.7k.annual.5,mean)
+t2<-applytime(ice.pi.annual.5,mean)
+
+
+
+#Derive contour lines
+temp<-plot.preparation(abs((t1-t2)*30),shift=T) #Contour lines for sea ice 
+ptest<-contourLines(temp$lon,temp$lat,temp$data,levels=1)
+
+
+load(file="c:/data/milan/Jan08/coefficientsLat.norm.dat") #Coefficients from the 5x5 experiment
+#Convert the 2D Arrays into pFields 
+latarray<-(-18:18)*5
+lonarray<-(0:71)*5+2.5
+cfield<-pField(m.coeff,1:4,latarray,lonarray)
+cfield.nocheck<-pField(m.coeff,1:4,latarray,lonarray)
+rfield<-pField(m.rsq,1:2,latarray,lonarray)
+mfield<-pField(m.other,1:2,latarray,lonarray)
+
+temp<-plot.preparation(mfield[1,],shift=T)
+ptest1<-contourLines(temp$lon,temp$lat,temp$data,levels=180) #Contour lines for Monsoon
+
+plotpolygon<-function()
+{
+col="grey40"
+for (i in 1:length(ptest)) polygon(ptest[[i]]$x,ptest[[i]]$y,density=30,col=col, border = col)
+
+for (i in 1:length(ptest1)) polygon(ptest1[[i]]$x,ptest1[[i]]$y,angle=-30,density=30,col=col, border = col)
+}
+
+
+plotpolygon1<-function()
+{
+col="grey40"
+for (i in 1:length(ptest1)) polygon(ptest1[[i]]$x,ptest1[[i]]$y,angle=-30,density=30,col=col, border = col)
+}
+
+#the slope is K/timestep which is 100years, to get K/7K we
+plot(slopefield*70,levels=levelsO,FUN=plotpolygon(),stype=T,main="7K-present trend")
+
+plot(slopefield.eem*70,levels=levelsO,FUN=plotpolygon1(),stype=T,main="124K-115K trend")
+
+.

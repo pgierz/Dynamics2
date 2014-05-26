@@ -1,0 +1,1 @@
+"C:\Program Files\Arbeit\R-3.0.1\bin\x64\Rterm.exe" -e "shiny::runApp('t:/weinschmeckt/shiny-project/22_cor plot')"
