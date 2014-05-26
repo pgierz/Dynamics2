@@ -1,0 +1,87 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+\pagestyle{fancy}
+\lhead{Dynamics 2\\Lecturer: Prof. Dr. G. Lohmann\\Due date: 02.06.2014}
+\rhead{Exercise 7, Summer semester 2014\\Prof. Dr. G. Lohmann\\26.05.2014}
+
+%opening
+\title{Exercise 7}
+%\author{ Gerrit Lohmann}
+\date{23. Mai 2011}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+The aim of this exercise is to analyse a proxy time series by computing the field correlations with gridded climate data sets (land surface temperature, sea surface temperature (SST), sea level pressure (SLP) and precipitation).
+
+\begin{enumerate}
+
+\item Plot the complete time series and the time series during the instrumental period (1900 to 2002). You can choose a time window of the time series in the shiny interface.
+\\
+
+
+\item Correlate the proxy time series with all seasons of the data sets (DJF, MAM, JJA, SON) and the annual mean. You can either show the global map or an interesting area of the map ( e.g. if there is only a local correlation).\\
+
+
+\item Describe the correlation maps without interpretation. You can describe all seasons of one climate variable at once.  
+\\
+\item Carefully discuss the results and speculate about the climate dependence of the proxy time series.  
+\\
+
+
+\end{enumerate}
+
+\textbf{Important hints:}
+\begin{itemize}
+\item Download the updated palaeolibrary and the shiny interface.
+\item  In most cases, it is good to plot all four seasons and the average mean correlation with the same colour range (zlim). It is recommended to take the maximum amount of correlation of all seasons as the limit value. 
+
+\end{itemize}
+\newpage
+The points are given as follows
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+	Plot of the results & \textit{ 3 points}\\
+	Description of the results& \textit{ 4 points}\\
+	Interpretation &\textit{ 4 points}
+
+\end{tabular}
+\caption{Points for this exercise}
+\label{tab:}
+\end{table}
+
+\begin{verbatim}
+	# Important R-commands
+	plot.final(field,ts,stype=4) is the most important function for this task
+	                      # stype should always be 4
+	optional commands are
+	main=".."             # plots a title
+	zlim=c(-x,x)          # Sets the range of the colour bar
+	plot_sig="siglines" or "contour"
+	                      #significance test
+	area=c(lat1=30,lat2=75, lon1=340,lon2=60)
+	                      # calculates the correlation of a specific area. 
+	shift=T               # Shifts the map that Europe is centred 
+	                      # don't use it together with area
+	point=c(lat=46,lon=10)# plots a point in the correlation map
+	                      # can be used to mark the location of the proxy
+
+	# Helpful introductions to R can be found in e.g.
+http://www.stat.cmu.edu/~larry/all-of-statistics/=R/Rintro.pdf
+http://cran.r-project.org/doc/manuals/R-intro.pdf
+\end{verbatim}
+\underline{Notes on submission form of the exercises:}
+ \textit{Two students work together in one group. Each group has to submit only one solution. The answers to the questions shall be send to paul.gierz@awi.de (The program code is not mandatory).
+}
+
+
+
+\end{document}
+
