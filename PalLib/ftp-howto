@@ -1,0 +1,83 @@
+
+Dear ftp-user,
+
+the AWI runs an anonymous ftp-server that can be used to exchange data
+with other institutions. The name of the server is
+
+  ftp.awi.de       (or 134.1.2.17)
+
+Anyone can access it via anonymous ftp, that is with
+
+   username : ftp
+   password : <her or his complete email-address>
+
+If you are working with a ftp-tool that uses URLs for ftp-connections,
+the URL of ftp.awi.de is
+
+   ftp://ftp:<your email-address>@ftp.awi.de
+
+Note: many default installations of web-browsers and ftp-tools have a
+template password configured like IEuser@example.com for anonymous ftp-
+connections. This is in most cases sufficient to log in on an anonymous
+ftp-server. Nevertheless, it is a matter of netiquette to use your correct
+email-address, so please take the time and update your browser configruration.
+
+Once connected to our ftp-server, you may download files and directories 
+from the trees under /incoming  and /pub . The maximum amount of data to
+transfer is 50 Gb per session and a session is limited to 12 hours.
+
+
+Anyone from inside the AWI-network may upload files to /incoming . This
+is also done with username  "ftp"  and the complete email-address as
+password. Again a data limit of 50 GB is imposed for uploads. Files
+under /incoming will be deleted automatically after three days, but you
+may not remove or overwrite existing files under /incoming yourself. So
+if you got the feeling that something has gone wrong with your data, you
+should contact ftpmaster@awi.de in order to get the problem fixed.
+
+Please be careful in choosing filenames. Filenames may only be build from
+the following set of characters
+
+   A-Z a-z 0-9 - . _ @ #
+
+and they must not begin with "-" or "." . You should also keep in mind, that
+you are allowed to create directories under /incoming (same restrictions on
+names as above) to store your files, but you are not allowed to create further
+subdiretories.
+
+******  ||| do not use blanks or tabs in filenames !!! *******
+
+
+Uploads from outside the AWI-network are normally not allowed due to
+legal reasons. But it is possible to configure an exception to that rule
+for known outside partners and for a limited timespan (a few days). In
+order to get this done we need to know the IP-address of the host, from
+which the upload will be started. Once the address is configured, con-
+nections from this address will be treated like inhouse connections,
+thereby allowing uploads to /incoming with the restrictions on the amount
+of data and on filenames from above.
+
+
+Anyone who is going to upload files on our ftp-server should keep in
+mind, that anyone else on the internet may access these files. So be
+careful with what you are uploading and never put any confidentials on
+the ftp-server.
+
+In general, it is not possible to protect directories on the ftp-server
+with a password, thereby limiting the access to those people who know 
+this password (this would require those people to have an AWI-account).
+A way to impose a password is to gather your data in zip-archives or
+win-zip-archives and set a password for the entire archive (rar and
+win-rar and the like are other methods to generate password-protected 
+archives)
+
+
+There are many other ways to use the ftp-server, but these require
+special configurations tailored to the needs of AWI-workgroups. So if
+you feel that the general procedure as outlined above does not fit
+your requirements, please contact  ftpmaster@awi.de  .
+
+
+Chresten Wuebber
+
+ftpmaster@awi.de
