@@ -1,0 +1,71 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+\pagestyle{fancy}
+\lhead{Dynamics 2\\Lecturer: Prof. Dr. G. Lohmann\\Due date: 07.06.2014}
+\rhead{Exercise 7, Summer semester 2014\\Paul Gierz\\30.06.2014}
+
+%opening
+\title{Exercise 7}
+%\author{ Gerrit Lohmann}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+The aim of this exercise is to understand the propegation of shallow
+water waves and examine deep ocean circulation.
+
+There is a R program to calculate both 1D and 2D waves. 
+
+\begin{enumerate}
+\item For both 1D and 2D waves:
+    \begin{itemize}
+        \item Run the program: Which type of waves do you see?
+        \item Change the constants of water depth H, gravity g, describe your observations!
+        \item Can you roughly estimate the phase speed of the waves?
+    \end{itemize}
+
+\item Consider a geostrophic flow $( u,  v) $
+\begin{equation}
+-f  v = - \frac{1}{\rho_0} \frac{\partial  p}{\partial x} \label{vdyn} \\
+f  u = - \frac{1}{\rho_0} \frac{\partial  p}{\partial y} 
+\end{equation}
+with pressure $ p (x,y,z,t)$. \\
+Use the hydrostatic approximation 
+\begin{equation}
+ \frac{\partial  p}{\partial z} = -g \rho
+ \end{equation}
+ and equation (\ref{vdyn}) in order to derive the meridional overturning stream function $\Phi(y,z)$ as a fuction of density $\rho$ at the basin boundaries! 
+$\Phi$ is defined via 
+\begin{equation}
+\Phi(y,z) = \int_{0}^{z} \frac{\partial  \Phi}{\partial \tilde z} \,d
+\tilde z
+\end{equation}
+\begin{equation}
+\frac{\partial  \Phi}{\partial \tilde z} = \int_{x_e}^{x_w} v(x,y,\tilde z) \, dx  \quad \mbox{(zonally integrated transport)}, 
+\end{equation}
+where $ x_e $ and $ x_w $ are the eastward and westward boundaries in
+the ocean basin (think e.g. of the Atlantic Ocean). Units of $\Phi$
+are $m^3 s^{-1}$. At the surface $\Phi(y,0)=0$.
+\item
+It is observed that water sinks in to the deep ocean in polar regions of the atlantic basin at a rate of 15 $Sv$.
+\begin{itemize}
+	\item How long would it take to 'fill up' the Atlantic basin?
+          (Assume $10^{14}m^{2}$ and $5km$ depth)
+	\item Supposing that the local sinking is balanced by
+          large-scale upwelling, estimate the strength of this
+          upwelling. Express your answer in $m\;y^{-1}.$
+\end{itemize}
+\end{enumerate}
+
+\vfill
+\underline{Notes on submission form of the exercises:}
+ \textit{Two students work together in one group. Each group has to submit only one solution. The answers to the questions shall be send to paul.gierz@awi.de.}
+
+\end{document}
+
