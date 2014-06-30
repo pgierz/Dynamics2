@@ -1,5 +1,5 @@
 library(shiny)
-library(shinyIncubator)
+##library(shinyIncubator)
 
 ## Define the server logic required for shallow water waves
 shinyServer(function(input, output, session) {
