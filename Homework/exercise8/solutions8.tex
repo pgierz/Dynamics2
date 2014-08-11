@@ -1,0 +1,157 @@
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lhead{Dynamics 2\\Lecturer: Prof. Dr. G. Lohmann\\Due date: 14.07.2014}
+\rhead{Exercise 8, Summer semester 2014\\Paul Gierz\\07.07.2014}
+
+%opening
+\title{Exercise 8: Last Exercise!!}
+%\author{ Gerrit Lohmann}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\begin{enumerate}
+\item {\bf Ice Sheet Melting} In the present climate the volume of freshwater trapped in ice sheets
+over land is ∼ $33 \times 10^{6}$ km$^{3}$. If all this ice melted and ran into
+the ocean, estimate by how much the sea level would rise. What would
+happen to sea level if all the sea-ice melted? 
+
+\item \textbf{Solution} We know the volume of ice from the problem,
+  the ocean area is 71\%, and the earth radius is 6371 km. Therefore,
+  we can calculate the amount of sea level rise:
+
+\begin{flalign}
+h &= \frac{V_ice}{A_ocean} \\
+&= \frac{33 \times 10^6}{362.145 \times 10^6} \\
+&= 91.1
+\end{flalign}
+
+Since sea ice floats on the ocean surface, it displaces just as much
+volume of water as it would generate when melting. Therefore, sea
+level rise can only be caused by land ice melting, along with
+accompanying second order effects (eg thermal expansion of the ocean)
+
+\item {\bf Wind-driven ocean circulation} When the windstress is only zonal, the Sverdrup transport is:
+ \begin{equation}
+\rho_0 \beta V = \mbox{curl } \tau = - \frac{\partial}{\partial y} {\tau^x} 
+\end{equation}
+ and Ekman transports and Ekman pumping velocity are:
+\begin{equation}
+\rho_0 f
+      V_E = -{\tau^x} \\
+\rho_0 w_E= \mbox{curl } \tau = - \frac{\partial}{\partial y}  {\tau^x} .
+\end{equation}
+Assume furthermore
+\begin{equation}
+\tau^x =
+      -\tau_0 \cos (\pi y/B)
+\end{equation}
+ for an ocean basin $0<x<L, 0<y<B$.
+\begin{enumerate}
+\item At what latitudes $y$ are $|V|$ and $|V_E|$ maximum? Calculate their
+magnitudes. Take constant $ f=10^{-4}\ \rm s^{-1}$ and $\beta=1.8
+\cdot 10^{-11}\ \rm m^{-1} s^{-1}$ and $B=5000\ {\rm km},
+\tau_0/\rho_0 = 10^{-4}\ \rm m^2 s^{-2}$.
+\item Calculate the maximum of $w_E$ for constant $f$ (value see
+      above).  Is this measurable?\\
+\end{enumerate}
+
+\item {\bf Stochastic Climate Model} Imagine that the temperature of
+  the ocean mixed layer of depth h is governed by 
+\begin{equation}
+      \frac{dT}{dt} = -\lambda T + \frac{Q_{net}}{\gamma_{O}} \, ,
+\end{equation}
+where coefficient $ \gamma_{O} $ is given by the heat capacity $c_p
+\rho h $, and $ \lambda $ is the typical damping rate of a temperature
+anomaly.
+The air-sea fluxes due to weather systems are represented by a
+white-noise process $Q_{net}=\hat{Q}_{\omega}e^{i\omega t}$ where
+$\hat{Q}_{\omega}$ is the amplitude of the random forcing at frequency $\omega$. $\hat{Q}^{*}$ is the complex conjugate.
+
+\begin{enumerate}
+\item  What is a white-noise process? Remember that 
+\begin{equation}
+\int_R \exp(i \omega t) \delta(t-0) dt = 1
+\end{equation}
+and use the Fourier transformation.
+
+\item Solve the equation (4) above for the temperature response $T= \hat{T}_{\omega}
+      e^{i\omega t}$ and hence show that:
+ \begin{equation}
+      \hat{T}_{\omega} = \frac{\hat{Q}_{\omega}}{\gamma_{O}\left({\lambda}+i \omega\right)}
+\end{equation}
+
+\item Show that it has a spectral density $\hat{T}_{\omega}\hat{T}^{*}_{\omega}$ is given by:
+ \begin{equation}
+      \hat{T}\hat{T}^{*}= \frac{\hat{Q}
+      \hat{Q}^{*}}{\gamma^{2}_{O}\left({\lambda}^{2}+ \omega^{2}\right)}
+\end{equation}
+and the spectrum
+\begin{equation}
+ S(\omega)
+      = <\hat{T}\hat{T}^{*}> =
+      \frac{1}{\gamma^{2}_{O}\left({\lambda}^{2}+ \omega^{2}\right)}.
+\end{equation}
+The brackets $ < \dots >$ denote the ensemble mean.
+Make a sketch of the spectrum using a log-log plot and show that fluctuations with a frequency greater than ${\lambda}$ are damped.
+\end{enumerate}
+
+\item {\bf Angular Momentum and Hadley Cell} Consider a
+      zonally symmetric circulation (i.e., one with no longitudinal
+      variations) in the atmosphere. In the inviscid upper troposphere
+      one expects such a flow to conserve absolute angular momentum,
+      i.e., 
+\begin{equation}
+\frac{DA}{Dt}=0
+\end{equation}
+
+where A is the absolute angular momentum per unit mass (parallel to
+the Earth's rotation axis)
+ \begin{equation}
+ A = r
+      \left(u + \Omega r \right) = \Omega R^{2} \cos^{2} \varphi + u R
+      \cos \varphi
+\end{equation}
+
+ $\Omega$ is the Earth rotation rate, $u$ the eastward wind component,
+ $ r = R \cos \varphi $ is the distance from the rotation axis, $R$
+ the Earth's radius, and $\varphi$ latitude.
+
+\begin{enumerate}
+
+\item Show for inviscid zonally symmetric flow that the relation
+  $\frac{DA}{Dt}=0$ is consistent with the zonal component of the equation of motion 
+ \begin{equation}
+      \frac{Du}{Dt} - f v = -\frac{1}{\rho}\frac{\partial p}{\partial x}
+      \label{udyn}
+\end{equation}
+in $\left(x,y,z\right)$ coordinates, where $y=R\varphi$.
+
+\item Use angular momentum conservation to describe in words how the
+  existence of the Hadley circulation explains the existence of both
+  the subtropical jet in the upper troposphere and the near-surface trade winds.
+
+\item If the Hadley circulation is symmetric about the equator, and
+  its edge is at $20^{\circ}$ latitude, determine the strength of the subtropical jet. Use (10, 11).
+
+\item Is the Hadley cell geostrophically driven or not?
+\end{enumerate}
+
+\end{enumerate}
+
+
+\vfill
+\underline{Notes on submission form of the exercises:}
+ \textit{Students can work together in groups, but each student must
+   submit his or her own solutions. The answers to the questions shall be send to paul.gierz@awi.de.}
+
+\end{document}
+

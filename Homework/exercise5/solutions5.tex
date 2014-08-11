@@ -1,0 +1,109 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+\pagestyle{fancy}
+\lhead{Dynamics 2\\Lecturer: Prof. Dr. G. Lohmann\\Due date: 23.06.2014}
+\rhead{Exercise 5, Summer semester 2014\\Paul Gierz\\16.06.2014}
+
+%opening
+\title{Exercise 5 Solution}
+%\author{ Gerrit Lohmann}
+\date{16. June 2014}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+In this excercise we will look at Foucault's Pendulum, which is a well known expirement
+used to demonstrate the Earth's rotation. One such pendulum is
+displayed at the entrance of the physics building at the university.
+
+From the course script:
+
+Let us denote $x$, $y$, $L$, and $\Theta$ as the coordinates of the
+pendulum, the length of the string, and the angle of the pendulum bob,
+respectively. The string tension due to gravity can be written as:
+
+\begin{equation}
+F_{g} = mg \left (\begin{array}{c} sin{\Theta} \\ sin{\Theta} \\
+    cos{\Theta} \end{array} \right ) \approx mg \left (\begin{array}{c} x/L \\ y/L \\
+    1-z/L \end{array} \right )
+\end{equation} 
+
+The horizontal dynamics can be explained via:
+
+\begin{equation}
+a_x = 2\Omega sin \varphi v_y - \frac{g}{L}x 
+\end{equation}
+\begin{equation}
+a_y = 2\Omega sin \varphi v_x - \frac{g}{L}y
+\end{equation}
+
+
+\begin{enumerate}
+
+\item Show the analytical solution by introducing the complex number
+  $\xi = x + i \cdot y$
+
+
+\textbf{Solution} 
+
+Multiply 2 by $i$:
+$$a_y i = -2 \Omega sin \varphi v_x i - \frac{g}{L} y i$$
+
+Add this into 1 and optain the differential equation for motion in the
+horizional plane':
+
+$$\ddot{\xi} = (- 2 i \Omega \varphi) \dot{xi}$$
+
+Thus, we will have two independent solutions. Solving the 2nd order
+differential equation introduce a variable $\xi(t) = e^{iat}$ and insert it
+above, where a is the solution for the characteristic equation
+
+$$a^{2} + 2i\Omega \varphi a + \frac{g}{L}$$
+$$a_{1,2} = -i \Omega sin \varphi \pm i \sqrt{\Omega ^{2} sin^{2}
+  \varphi + \frac{g}{L}}$$
+
+So,
+
+$$\xi (t) = x_{1}e^{-ia_{2}t}+x_{2}e^{-ia_{2}t}$$
+
+$x_{1}$ and $x_{2}$ depend on the initial conditions (velocity, and
+potision). Solving for $x_{1}$ and $x_{2}$ gives:
+
+$$x_{1} = \frac{1}{2} + \frac{\Omega sin
+  \varphi}{\sqrt{\Omega^{2}sin^{2} \varphi + \frac{g}{L}^{2}}}$$
+
+$$x_{2} = \frac{1}{2} - \frac{\Omega sin
+  \varphi}{\sqrt{\Omega^{2}sin^{2} \varphi + \frac{g}{L}^{2}}}$$
+
+\item For Foucault's pendulum in Paris: the plane of the pendulum
+  rotates clockwise $11^{\circ}$ per hour, making a full circle in
+  32.7 hours. What is the period in Bremen?  What is the period at
+  your home town?
+
+\textbf{Solution} For Bremen, the period is 30 hours.
+
+\item Using the \texttt{shiny} program provided, compare the
+  analytical solution with the numerical solution.
+
+\item Geological evidence suggests that the Earth used to have a
+  shorter day in the past, due to the impact forming the moon (angular
+  momentum). What is
+  the period of the pendulum on an Earth with only a 22 hour day for
+  the 3 locations (Paris, Bremen, your home)?
+
+\textbf{Solution} With a shorter day, the period is 28 hours in bremen.
+\end{enumerate}
+
+
+\vfill
+\underline{Notes on submission form of the exercises:}
+ \textit{Students can work together, but each is required to submit
+   his or her own solutions. The answers to the questions shall be send to paul.gierz@awi.de.}
+
+\end{document}
+

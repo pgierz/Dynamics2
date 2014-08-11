@@ -1,0 +1,316 @@
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr,lastpage}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{ulem}
+
+
+\usepackage{natbib}
+\usepackage{wasysym}      % \permil
+\usepackage{graphicx}
+\usepackage{booktabs}
+\bibpunct{(}{)}{;}{a}{,}{;}
+
+
+\pagestyle{fancy}
+\lhead{Dynamics 2\\   \quad \\Due date: 19.05.2014}
+\rhead{Exercise 2, SS 2014\\Prof. Dr. G. Lohmann\\ Paul Gierz}
+
+
+%\bibpunct{(}{)}{;}{a}{,}{;}
+
+%often used special strings in normal Text
+\def\delO{$\delta^{18}$O}           % delta-18-O
+\def\delD{$\delta$D}                % delta-D
+\def\H2Oi{H$_2$$^{18}$O}            % H2-18-O
+\def\ra{$\Rightarrow$}              % =>
+\def\la{$\Leftarrow$}               % <=
+\def\deg{$^{\circ}$}                % Grad
+\def\degC{$^{\circ}$C}              % Grad Celsius
+
+%often used special strings in formula environment
+\def\fdelO{\delta^{18}\textrm{O}}   % delta-18-O
+\def\fdelD{\delta\textrm{D}}        % delta-D
+\def\fra{\Rightarrow}               % =>
+\def\fla{\Leftarrow}                % <=
+
+
+%often used structures
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+
+\newcommand{\beq}{\begin{eqnarray*}}
+\newcommand{\eeq}{\end{eqnarray*}}
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+\newcommand{\Der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\Dtwo}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\Dx}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\Dt}[1]{\frac{\partial #1}{\partial t}}
+%\newcommand{\itt}{\footnotesize}
+\newcommand{\sff}{\small \sf}
+\newcommand{\itt}{\it }
+\newcommand{\itc}{\it }
+\newcommand{\dx}{\partial_x}
+\newcommand{\dy}{\partial_y}
+\newcommand{\dz}{\partial_z}
+\newcommand{\dt}{\partial_t}
+\newcommand{\ad}{{\footnotemark[2]}}
+
+
+\newcommand{\Eta}{ \boldmath E }
+\newcommand{\vbf}{ \boldsymbol }
+\newcommand{\fig}{Fig.\,}
+\newcommand{\figs}{Figs.\,}
+\renewcommand{\beq}{\begin{eqnarray*}}
+\renewcommand{\eeq}{\end{eqnarray*}}
+\renewcommand{\beqn}{\begin{eqnarray}}
+\renewcommand{\eeqn}{\end{eqnarray}}
+\newcommand{\OneMUskip}{\mskip 1mu \relax}  
+% 18mu=1em f"ur \textfont
+\newcommand{\Nat}{{\sf N\OneMUskip}}
+\newcommand{\Reals}{{\sf R\OneMUskip}}
+\newcommand{\Complex}{{\sf C\OneMUskip}}
+
+%opening
+\title{Solutions: Exercise 2}
+
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\begin{enumerate}
+    
+
+\item {\bf Several questions about the course:} (\textit{0.5 points each})\\
+\begin{enumerate}
+\item The
+      Coriolis parameter f is defined as \\
+a) $ f =
+      \Omega \cos \varphi $\\
+b) $ f = 2
+      \Omega \cos \varphi $ \\
+c) $ f = 2
+      \Omega \sin \varphi $ \\
+d) $ f =
+      \beta y $ \\
+\textbf{Solution: C} $f=2\Omega\cos\varphi$
+
+\item Please clarify: On the Northern Hemisphere, particles tend to go to the right or left relative to the direction of motion due to the Coriolis force? 
+
+\textbf{Solution:} On the Northern hemisphere, the motion is deflected
+to the right.
+
+\item Please write down the equation of state for the ocean and atmosphere!
+
+\textbf{Solution:} Atmosphere: $P=\rho RT$, Ocean: $\rho=\rho(s,T,P)$
+
+\item What is the hydrostatic approximation in the momentum equations?
+
+\textbf{Solution:} $\frac{dP}{dz} = -g \rho$
+
+
+\end{enumerate}
+\item 
+{\bf Short programming questions.}\textit{ (\textit{1 point each})}
+
+ Write down and explain the output for the following R-commands:
+ \begin{enumerate}
+
+\item
+      \begin{verbatim}0:10 \end{verbatim}
+
+\textbf{Solution} displays numbers 0 to 10
+
+\item
+      \begin{verbatim}a<-c(0,5,3,4); mean(a)\end{verbatim} 
+
+\textbf{Solution} Sets up a vector with the assigned values, and
+displays the mean
+
+\item
+      \begin{verbatim}max(a)-min(a) \end{verbatim} 
+\textbf{Solution} Returns the difference between max and min.
+\item
+      \begin{verbatim}paste("The mean value of a is",mean(a),"for
+      sure",sep="_") \end{verbatim}
+
+\textbf{Solution} Displays the string and the mean
+
+\item
+      \begin{verbatim}a*2+c(1,1,1,0)\end{verbatim} 
+\textbf{Solution} Multiplies a by 2 and then sums up element-wise.
+\item
+      \begin{verbatim}
+my.fun<-function(n){return(n*n+1)}
+my.fun(10)-my.fun(1)\end{verbatim}
+
+\textbf{Solution} Defines a function which returns the square plus 1,
+and evaluates this for 10 minus 1. 
+\end{enumerate}
+\vspace{1cm}
+
+  \item \textbf{Evaluate the double vector product:} (\textit{2 points})
+$$ \Omega \times ( \Omega \times r ) $$
+with vectors $\Omega=(0,0,\omega)$ and $r=(x,y,z)$.
+
+\textbf{Solution}
+$$
+\left( 
+\begin{array}{c}
+ -x\omega^{2} \\
+ -y\omega^{2} \\
+ 0
+ \end{array}
+\right)
+$$
+
+  \item \textbf{Given $f(x,y,z,t)$. What is the definition of partial derivatives for this variable?
+What is the definition of nabla, Laplacean, divergence, total (substantial) derivative, total differential?} (\textit{2 points})
+
+\textbf{Solution} The partial derivative is the derivate of a function
+with respect to each variable at a time while considering all others
+constant.
+
+The $\nabla$ opeator represetns a vector of partial derivates for x,
+y, and z respectively.
+
+The Laplacean $\nabla^2$ represents the sum of the second partial
+derivates of a function. It is used to represent flux density of a
+gradient flow.
+
+The divergence is the dot product of $\nabla$ and the velocity vector.
+
+The total derivative is the derivate of a function with respect to all
+variables that are not assumed constant.
+
+The Total Differential is the sum over all of the independent
+variables of the partial derivative of the function with respect to a
+variables times the total differential of that variable.
+
+\item {\bf Population Dynamics} (1 point each)\\
+ Consider population dynamics with population $x > 0 $ and reproduction (birth-death) $ r $:
+      \begin{equation}
+          \frac{dx}{dt} = x \cdot r(x) \label{popDyn}
+      \end{equation}
+      \begin{enumerate}
+ \item
+      Solve the differential equation for $r(x)=r_0=const.$!\\
+      What happens for $t \to \infty $ when $r_0 > 0$ or $r_0 < 0$ ?\\
+
+\textbf{Solution} 
+$$ x = e^{r_{o}t$$
+for $r>0, t \to \infty, x \to \infty$
+for $r<0, t \to \infty, x \to -\infty$ 
+
+ \item
+      Solve the differential equation for $r=r_0 (1-x) $! (limited
+      growth)\\
+
+\textbf{Solution}
+$$x = -\frac{e^{r_{o}t}}{1-e^{r_{o}t}}$$
+
+ What
+      happens for $t \to \infty $?\\
+
+\textbf{Solution}
+$$t \to \infty: x = 1$$
+ \item
+      Consider the case $r=r_0 (1-x/K) $ with $K>0$ ! Give a physical
+      interpretation for $ K $! \\
+
+\textbf{Solution}
+
+K ( Carrying Capacity) gives the stable equilibrium point where the function stabilizes.
+ % \item
+      Calculate the bifurcation with respect to parameter $r$;
+      illustrate with a bifurcation diagram.
+
+\textbf{See lecture notes, a bifurcation diagram is presented}
+
+      \end{enumerate}
+
+ \item
+      {\bf Difference equations} (\textit{1 point each})\\
+ Consider the discretised form of (\ref{popDyn}) using the Euler scheme
+ \begin{equation}
+      \frac{dx}{dt} \approx \frac{x_{n+1}-x_n}{\Delta t}.
+ \end{equation}
+
+      \begin{enumerate}
+ \item
+      Write down the iteration $x_{n+1}$ as a function of $x_{n}$ .\\
+
+\textbf{Solution} $x_{n+1}=x_n + x_n \cdot r_0 \cdot \delta t$
+
+ \item
+      What is the solution of $x_{n+1}$ as a function of $x_{0}$?\\
+ Consider
+      the stability for the cases $r>0$, \, $0 > \Delta t \, r
+      > -1$, \, $ -1 > \Delta t \, r > -2$, \, $ -2 > \Delta
+      t \, r$ \, . \\
+ Do you
+      have a graphical interpretation of the oscillation/decay?\\
+\textbf{Solution} $x_{n+1}=x_{0}(1+r_{o}\delta t)^{n+1} $
+      \end{enumerate}
+
+\item \textbf{Reynolds Number} (\textit{3 points}) \\
+Let us consider a flow problem where the fluid behaves according to the incompressible Navier-Stokes equations: \\
+\begin{center}
+\begin{align}
+\left\{
+\begin{array}{r}
+      \displaystyle \frac{\partial \vec{u}}{\partial t} +
+      \left(\vec{u}\cdot \nabla\right)\vec{u} = -\frac{1}{\rho_0}\nabla
+      p + \nu \nabla^2 \vec{u}\\
+      \displaystyle \nabla \cdot \vec{u} = 0
+\end{array}
+\right 
+\end{align}
+\end{center}
+where:
+\begin{itemize}
+ \item
+      $\vec{u}$ = flow velocity;
+ \item $t$
+      = time;
+ \item
+      $\rho_0$ = fluid density (constant);
+ \item $p$
+      = pressure;
+ \item
+      $\nu$ = kinematic viscosity (fluid property).
+\end{itemize}
+
+Using the reference density $\rho_0$ and further assuming that a reference lengthscale $l_0$ and a reference flow velocity $U_0$ have already been defined for the flow, transform these equations into a non-dimensional frame of reference. On how many parameters does the flow depend in the non-dimensional system? What is the role of the Reynolds number ($Re\equiv \frac{U_0 l_0}{\nu}$)?
+
+
+\textbf{Solution} The Reynolds number $\left[ \frac{v_{o}}{uL} \right]$ represents the ratio of the
+magnitudes of the inertial and viscous terms, if this is a small
+number, the larger the viscous terms are and thus the more turbulent
+the flow 
+
+In the nondimensional system, the flow depends on its velocity and the
+length of the motion.
+
+{\small
+      \textit{Hint: Use $U_0,\ \rho_0,\ l_0$ to construct reference values
+      for all other involved quantities ($t,p$) and operators
+      ($\partial/\partial_t,\ \nabla$), insert them into the equations
+      and reduce as much as possible the terms which have constant
+      factors.}}
+
+\end{enumerate}
+
+
+%\hspace{2cm}
+\vfill
+%\hline
+\underline{Notes on submission of the exercises:}
+ \textit{
+Working in study groups  is encouraged, but each student is responsible for his/her own solution.
+Please email your own answers to the questions to Paul.Gierz@awi.de.
+}
+
+\end{document}
